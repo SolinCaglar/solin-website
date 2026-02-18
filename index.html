@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,39 +8,327 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
         }
         h1 {
-            font-size: 48px;
+            font-size: 64px;
+            font-family: 'Georgia', 'Times New Roman', cursive;
+            font-style: italic;
+            color: white;
+            margin: 20px 0 0 0;
+        }
+        .intro {
+            font-size: 24px;
+            font-family: 'Georgia', 'Times New Roman', cursive;
+            font-style: italic;
+            color: #333;
+            margin: 10px 0 0 0;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .tab {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-family: 'Georgia', 'Times New Roman', cursive;
+            font-style: italic;
+            background-color: white;
+            color: #333;
+            border: 2px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .tab:hover {
+            background-color: #333;
+            color: white;
+        }
+        .tab.active {
+            background-color: #333;
+            color: white;
+        }
+        .tab-content {
+            margin-top: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 900px;
+            min-height: 200px;
+            border-radius: 12px;
+            text-align: center;
+            font-family: 'Georgia', 'Times New Roman', cursive;
+            font-style: italic;
+            font-size: 18px;
+            color: #333;
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .masonry {
+            columns: 3;
+            column-gap: 15px;
+            width: 100%;
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+        }
+        .masonry-item img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+        .submissions {
+            margin-top: 30px;
+            width: 100%;
+        }
+        .submissions h3 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .submit-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .submit-form textarea {
+            width: 70%;
+            height: 60px;
+            padding: 10px;
+            font-family: 'Georgia', 'Times New Roman', cursive;
+            font-style: italic;
+            font-size: 16px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            resize: none;
+        }
+        .submit-form button {
+            padding: 10px 20px;
+            font-family: 'Georgia', 'Times New Roman', cursive;
+            font-style: italic;
+            font-size: 16px;
+            background-color: white;
+            color: #333;
+            border: 2px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+        .submit-form button:hover {
+            background-color: #333;
+            color: white;
+        }
+        .char-count {
+            font-size: 14px;
+            color: #555;
+            text-align: right;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+        .thoughts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .thought-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px 20px;
+            border-radius: 10px;
+            width: 80%;
+            text-align: left;
+            font-size: 16px;
             color: #333;
         }
-        .python-logo {
+        .thought-date {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+        .delete-btn {
+            display: none;
+            float: right;
+            background: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-family: 'Georgia', 'Times New Roman', cursive;
+            font-style: italic;
+            font-size: 13px;
+        }
+        .delete-btn:hover {
+            background: #e74c3c;
+        }
+        body.admin-mode .delete-btn {
+            display: inline-block;
+        }
+        .admin-badge {
+            display: none;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #c0392b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            z-index: 20;
+        }
+        body.admin-mode .admin-badge {
+            display: block;
+        }
+        .corner-tl {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 200px;
-            height: 200px;
-            margin-top: 20px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .corner-br {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            transform: rotate(180deg);
+            pointer-events: none;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
+    <img src="IMG_5955.PNG" class="corner-tl" alt="">
+    <img src="IMG_5955.PNG" class="corner-br" alt="">
+    <div class="admin-badge">Admin Mode</div>
+    <iframe style="border-radius:12px; margin-top:20px;" src="https://open.spotify.com/embed/playlist/302NeJLcwn30gM2TGOet84?utm_source=generator&theme=0" width="400" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     <h1>Hello World</h1>
-    <svg class="python-logo" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#366A96"/>
-                <stop offset="100%" style="stop-color:#3679B0"/>
-            </linearGradient>
-            <linearGradient id="yellow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#FFC836"/>
-                <stop offset="100%" style="stop-color:#FFD43B"/>
-            </linearGradient>
-        </defs>
-        <!-- Blue half -->
-        <path d="M54.5 4C37 4 39 11 39 11l0.1 7.5H55v2.5H25s-11-1.2-11 16c0 17.2 9.5 16.5 9.5 16.5h5.7V46s-0.3-9.5 9.3-9.5h16c0 0 9 0.2 9-8.8V13.5S65 4 54.5 4zM38.2 10c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z" fill="url(#blue)"/>
-        <!-- Yellow half -->
-        <path d="M55.5 106C73 106 71 99 71 99l-0.1-7.5H55V89H85s11 1.2 11-16c0-17.2-9.5-16.5-9.5-16.5H80.8V64s0.3 9.5-9.3 9.5H55.5c0 0-9-0.2-9 8.8v14.2S45 106 55.5 106zM71.8 100c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z" fill="url(#yellow)"/>
-    </svg>
+    <p class="intro">This is my new website, my name is Solin!</p>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('interest')">Interest</button>
+        <button class="tab" onclick="showTab('wishlist')">Wishlist</button>
+        <button class="tab" onclick="showTab('halloffame')">Hall of Fame</button>
+        <button class="tab" onclick="showTab('feelings')">My Feelings...</button>
+    </div>
+
+    <div id="interest" class="tab-content active">
+        <div class="submissions">
+            <h3>Share your thoughts</h3>
+            <div class="submit-form">
+                <textarea id="thoughtInput" maxlength="200" placeholder="Write a thought (max 200 characters)..."></textarea>
+                <button onclick="submitThought()">Submit</button>
+            </div>
+            <p class="char-count"><span id="charCount">0</span>/200</p>
+            <div class="thoughts-list" id="thoughtsList"></div>
+        </div>
+    </div>
+    <div id="wishlist" class="tab-content">
+        <div class="masonry">
+            <div class="masonry-item">
+                <img src="images for website/ball.jpg" alt="Ball">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/bedside table.jpg" alt="Bedside Table">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/coffee.jpg" alt="Coffee">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/coffeee2.jpg" alt="Coffee 2">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/comp.jpg" alt="Computer">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/kitty.jpg" alt="Kitty">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/livingroom.jpg" alt="Living Room">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/vases.jpg" alt="Vases">
+            </div>
+            <div class="masonry-item">
+                <img src="images for website/yoga.jpg" alt="Yoga">
+            </div>
+        </div>
+    </div>
+    <div id="halloffame" class="tab-content">
+        <p>Hall of Fame content goes here.</p>
+    </div>
+    <div id="feelings" class="tab-content">
+        <div style="text-align: left;">
+            <h3 style="color: white;">18.02.2026</h3>
+            <p>This is the first time I'm using an online diary. It's quite nerve wracking but I'll deal with it.</p>
+            <p>I've been very annoyed with some of my classmates. Ew.</p>
+            <p>And this page is lowkey childish but It's fine for now.</p>
+            <p>Yippeee more entries to come!!</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector('[onclick="showTab(\'' + tabId + '\')"]').classList.add('active');
+        }
+
+        var thoughtInput = document.getElementById('thoughtInput');
+        var charCount = document.getElementById('charCount');
+
+        thoughtInput.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        function getThoughts() {
+            return JSON.parse(localStorage.getItem('thoughts') || '[]');
+        }
+
+        function renderThoughts() {
+            var thoughts = getThoughts();
+            var list = document.getElementById('thoughtsList');
+            list.innerHTML = '';
+            thoughts.forEach(function(t, i) {
+                var card = document.createElement('div');
+                card.className = 'thought-card';
+                card.innerHTML = '<button class="delete-btn" onclick="deleteThought(' + i + ')">Delete</button>' +
+                    '<p>' + t.text + '</p><p class="thought-date">' + t.date + '</p>';
+                list.appendChild(card);
+            });
+        }
+
+        function deleteThought(index) {
+            var thoughts = getThoughts();
+            thoughts.splice(index, 1);
+            localStorage.setItem('thoughts', JSON.stringify(thoughts));
+            renderThoughts();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                document.body.classList.toggle('admin-mode');
+            }
+        });
+
+        function submitThought() {
+            var text = thoughtInput.value.trim();
+            if (!text) return;
+            var thoughts = getThoughts();
+            thoughts.unshift({ text: text, date: new Date().toLocaleString() });
+            localStorage.setItem('thoughts', JSON.stringify(thoughts));
+            thoughtInput.value = '';
+            charCount.textContent = '0';
+            renderThoughts();
+        }
+
+        renderThoughts();
+    </script>
 </body>
 </html>
