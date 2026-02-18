@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+    <style>
+        body {
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 48px;
+            color: #333;
+        }
+        .python-logo {
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <svg class="python-logo" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#366A96"/>
+                <stop offset="100%" style="stop-color:#3679B0"/>
+            </linearGradient>
+            <linearGradient id="yellow" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FFC836"/>
+                <stop offset="100%" style="stop-color:#FFD43B"/>
+            </linearGradient>
+        </defs>
+        <!-- Blue half -->
+        <path d="M54.5 4C37 4 39 11 39 11l0.1 7.5H55v2.5H25s-11-1.2-11 16c0 17.2 9.5 16.5 9.5 16.5h5.7V46s-0.3-9.5 9.3-9.5h16c0 0 9 0.2 9-8.8V13.5S65 4 54.5 4zM38.2 10c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z" fill="url(#blue)"/>
+        <!-- Yellow half -->
+        <path d="M55.5 106C73 106 71 99 71 99l-0.1-7.5H55V89H85s11 1.2 11-16c0-17.2-9.5-16.5-9.5-16.5H80.8V64s0.3 9.5-9.3 9.5H55.5c0 0-9-0.2-9 8.8v14.2S45 106 55.5 106zM71.8 100c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z" fill="url(#yellow)"/>
+    </svg>
+</body>
+</html>
