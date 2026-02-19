@@ -136,13 +136,19 @@
             align-items: center;
         }
         .thought-card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 15px 20px;
+            padding: 30px 25px;
             border-radius: 10px;
             width: 80%;
             text-align: left;
             font-size: 16px;
             color: #333;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .thought-date {
             font-size: 12px;
@@ -316,6 +322,8 @@
             return JSON.parse(localStorage.getItem('thoughts') || '[]');
         }
 
+        var stickyImages = ['stickies/1.jpg','stickies/2.jpg','stickies/3.jpg','stickies/4.jpg','stickies/5.jpg'];
+
         function renderThoughts() {
             var thoughts = getThoughts();
             var list = document.getElementById('thoughtsList');
@@ -323,10 +331,14 @@
             thoughts.forEach(function(t, i) {
                 var card = document.createElement('div');
                 card.className = 'thought-card';
+                var bg = t.sticky || stickyImages[i % stickyImages.length];
+                card.style.backgroundImage = 'url(' + bg + ')';
+                if (!t.sticky) { t.sticky = bg; }
                 card.innerHTML = '<button class="delete-btn" onclick="deleteThought(' + i + ')">Delete</button>' +
                     '<p>' + t.text + '</p><p class="thought-date">' + t.date + '</p>';
                 list.appendChild(card);
             });
+            localStorage.setItem('thoughts', JSON.stringify(thoughts));
         }
 
         function deleteThought(index) {
@@ -346,7 +358,8 @@
             var text = thoughtInput.value.trim();
             if (!text) return;
             var thoughts = getThoughts();
-            thoughts.unshift({ text: text, date: new Date().toLocaleString() });
+            var randomSticky = stickyImages[Math.floor(Math.random() * stickyImages.length)];
+            thoughts.unshift({ text: text, date: new Date().toLocaleString(), sticky: randomSticky });
             localStorage.setItem('thoughts', JSON.stringify(thoughts));
             thoughtInput.value = '';
             charCount.textContent = '0';
