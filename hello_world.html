@@ -130,10 +130,13 @@
             margin-bottom: 10px;
         }
         .thoughts-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
+            columns: 3;
+            column-gap: 15px;
+            width: 100%;
+        }
+        .thoughts-list .thought-card {
+            break-inside: avoid;
+            margin: 0 auto 15px auto;
         }
         .thought-card {
             width: 350px;
