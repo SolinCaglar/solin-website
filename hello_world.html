@@ -314,7 +314,21 @@
         </a>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDytbBaOIIJCPspcTCR0BWeP5Gc8IP6tFE",
+            authDomain: "solin-website.firebaseapp.com",
+            databaseURL: "https://solin-website-default-rtdb.firebaseio.com",
+            projectId: "solin-website",
+            storageBucket: "solin-website.firebasestorage.app",
+            messagingSenderId: "378754004275",
+            appId: "1:378754004275:web:b1e96e4d9b277f5bdcfa46"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.database();
+
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -329,34 +343,24 @@
             charCount.textContent = this.value.length;
         });
 
-        function getThoughts() {
-            return JSON.parse(localStorage.getItem('thoughts') || '[]');
-        }
-
         var stickyImages = ['stickies/1.jpg','stickies/2.jpg','stickies/3.jpg','stickies/4.jpg','stickies/5.jpg'];
 
-        function renderThoughts() {
-            var thoughts = getThoughts();
+        function renderThoughts(thoughts) {
             var list = document.getElementById('thoughtsList');
             list.innerHTML = '';
-            thoughts.forEach(function(t, i) {
+            thoughts.forEach(function(t) {
                 var card = document.createElement('div');
                 card.className = 'thought-card';
-                var bg = t.sticky || stickyImages[i % stickyImages.length];
+                var bg = t.sticky || stickyImages[0];
                 card.style.backgroundImage = 'url(' + bg + ')';
-                if (!t.sticky) { t.sticky = bg; }
-                card.innerHTML = '<button class="delete-btn" onclick="deleteThought(' + i + ')">Delete</button>' +
+                card.innerHTML = '<button class="delete-btn" onclick="deleteThought(\'' + t.key + '\')">Delete</button>' +
                     '<p>' + t.text + '</p><p class="thought-date">' + t.date + '</p>';
                 list.appendChild(card);
             });
-            localStorage.setItem('thoughts', JSON.stringify(thoughts));
         }
 
-        function deleteThought(index) {
-            var thoughts = getThoughts();
-            thoughts.splice(index, 1);
-            localStorage.setItem('thoughts', JSON.stringify(thoughts));
-            renderThoughts();
+        function deleteThought(key) {
+            db.ref('thoughts/' + key).remove();
         }
 
         document.addEventListener('keydown', function(e) {
@@ -368,16 +372,27 @@
         function submitThought() {
             var text = thoughtInput.value.trim();
             if (!text) return;
-            var thoughts = getThoughts();
             var randomSticky = stickyImages[Math.floor(Math.random() * stickyImages.length)];
-            thoughts.unshift({ text: text, date: new Date().toLocaleString(), sticky: randomSticky });
-            localStorage.setItem('thoughts', JSON.stringify(thoughts));
+            db.ref('thoughts').push({
+                text: text,
+                date: new Date().toLocaleString(),
+                sticky: randomSticky,
+                timestamp: Date.now()
+            });
             thoughtInput.value = '';
             charCount.textContent = '0';
-            renderThoughts();
         }
 
-        renderThoughts();
+        db.ref('thoughts').orderByChild('timestamp').on('value', function(snapshot) {
+            var thoughts = [];
+            snapshot.forEach(function(child) {
+                var t = child.val();
+                t.key = child.key;
+                thoughts.push(t);
+            });
+            thoughts.reverse();
+            renderThoughts(thoughts);
+        });
     </script>
 </body>
 </html>
